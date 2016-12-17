@@ -1,0 +1,34 @@
+service: schedule-clean
+
+frameworkVersion: ">=1.0.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  stage: dev
+  region: eu-central-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+      Resource: arn:aws:s3:::nfllook-schedule-raw/*
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+      Resource: arn:aws:s3:::nfllook-schedule-clean/*   
+
+functions:
+  clean:
+    handler: handler.clean
+    events:
+      - s3:
+          bucket: nfllook-schedule-raw
+          event: s3:ObjectCreated:*
+    memorySize: 128
+
+resources:
+  Resources:
+    CleanScheduleBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: nfllook-schedule-clean
