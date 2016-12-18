@@ -7,6 +7,8 @@ provider:
   runtime: nodejs4.3
   stage: dev
   region: eu-central-1
+  environment:
+    MONGO_DB_URI: ${file(config.yml):mongoDBUri}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -16,8 +18,17 @@ provider:
       Action:
         - s3:PutObject
       Resource: arn:aws:s3:::nfllook-schedule-clean/*
+    - Effect: Allow
+      Action:
+        - s3:GetObject
+      Resource: arn:aws:s3:::nfllook-schedule-clean/*
 
 functions:
+  download:
+    handler: download_handler.download
+    events:
+      - schedule: cron(0 12 ? * THU *)
+    memorySize: 128
   clean:
     handler: clean_handler.clean
     events:
@@ -25,15 +36,10 @@ functions:
           bucket: nfllook-schedule-raw
           event: s3:ObjectCreated:*
     memorySize: 128
-  download:
-    handler: download_handler.download
+  export:
+    handler: export_handler.export
     events:
-      - schedule: cron(0 12 ? * THU *)
+      - s3:
+          bucket: nfllook-schedule-clean
+          event: s3:ObjectCreated:*
     memorySize: 128
-
-resources:
-  Resources:
-    CleanScheduleBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: nfllook-schedule-clean

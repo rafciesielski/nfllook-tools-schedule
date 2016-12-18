@@ -1,0 +1,1 @@
+mongoDBUri: mongodb://user:pass@host:port/db
