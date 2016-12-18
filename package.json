@@ -2,7 +2,7 @@
   "name": "nfllook-tools-schedule",
   "version": "0.3.0",
   "description": "Download, clean and export NFL schedule",
-  "main": "handler.js",
+  "main": "download_handler.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rafciesielski/nfllook-tools-schedule.git"
@@ -15,6 +15,8 @@
   "homepage": "https://github.com/rafciesielski/nfllook-tools-schedule#readme",
   "dependencies": {
     "aws-sdk": "^2.7.15",
+    "mongodb": "^2.2.16",
+    "request": "^2.79.0",
     "xml2js": "^0.4.17"
   }
 }

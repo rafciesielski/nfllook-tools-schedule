@@ -7,9 +7,10 @@ Download, clean and export NFL schedule
 3. Serverless Framework
 4. https://serverless.com/framework/docs/providers/aws/guide/credentials/
 
-## Deploy AWS lambda function
-cd schedule-clean
-
+## Deploy AWS lambda functions
 npm install
 
 sls deploy
+
+## Invoke download function
+sls invoke local --function download

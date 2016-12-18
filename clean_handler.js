@@ -4,10 +4,10 @@ var aws = require('aws-sdk');
 var s3 = new aws.S3({
     apiVersion: '2006-03-01'
 });
-var cleanSchedule = require('./clean_schedule');
+
+var cleanSchedule = require('./lib/clean_schedule');
 
 module.exports.clean = (event, context, callback) => {
-
     getS3EventBody(event)
         .then(cleanSchedule)
         .then(putScheduleInS3)
