@@ -1,5 +1,7 @@
 # nfllook-tools-schedule
-Download, clean and export NFL schedule
+Download, clean and export NFL schedule to MongoDB
+
+![nfllook-tools-schedule overview](nfllook-tools-schedule.png)
 
 ## Prerequisites:
 1. AWS account
