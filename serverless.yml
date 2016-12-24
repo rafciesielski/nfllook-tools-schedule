@@ -12,6 +12,10 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
+        - s3:PutObject
+      Resource: arn:aws:s3:::nfllook-schedule-raw/*
+    - Effect: Allow
+      Action:
         - s3:GetObject
       Resource: arn:aws:s3:::nfllook-schedule-raw/*
     - Effect: Allow
