@@ -1,5 +1,5 @@
 # nfllook-tools-schedule
-Download, clean and export NFL schedule to MongoDB
+Download, clean and export to MongoDB NFL schedule
 
 ![nfllook-tools-schedule overview](nfllook-tools-schedule.png)
 
